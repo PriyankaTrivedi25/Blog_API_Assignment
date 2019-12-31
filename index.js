@@ -219,3 +219,37 @@ app.get('/get_profile_api/:id',(req,res)=>
 		});
 
 
+
+//Async api for add_like
+		app.get('/async_add_like/:id',async(req,res)=>
+		{
+			var count=0;
+			conn.query("select likes from posts where id=?",[req.params.id],(err, row , field)=>
+			{
+				if(!err)
+				{
+					var i1=req.params.id;
+					count=row[0]["likes"];
+					count++;
+					conn.query("update posts set likes=? where id=?",[count,i1],(err,row,field)=>{
+						if(!err)
+						{
+							res.send(row);
+						}
+						else{
+							res.send(err);
+						}
+
+					});
+			}
+				else
+				{
+				res.send(err);
+			}
+			});
+		});
+
+
+
+
+
