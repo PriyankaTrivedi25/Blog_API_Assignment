@@ -54,7 +54,7 @@ formate for json data:
 
 
 //api for create_blog_posts
-//	json formate:{"title":"t2","description":"my second post","likes":5,"images_url":"img/myimg2.jpg","u_id":1}
+//	json format:{"title":"t2","description":"my second post","likes":5,"images_url":"img/myimg2.jpg","u_id":1}
 	app.post('/create_blog_posts',(req,res)=>{
 	req.on('data', function (data) {
 
@@ -78,7 +78,7 @@ formate for json data:
 
 
 //api for create_comment
-//json formate: {"commented_by":"pihu","post_id":"1","comment":"congratulation"}
+//json format: {"commented_by":"pihu","post_id":"1","comment":"congratulation"}
 		app.post('/create_comment',(req,res)=>{
 		req.on('data', function (data) {
 
@@ -99,6 +99,8 @@ formate for json data:
 
 
 //update user api
+/* formate for json data:  
+		{"email":"pihu@gmail.com","pwd":"piyudii","bio":"I am Learning","gender":"FeMale","age":21,"fnm":"pihu","lnm":"Trivedi"} */
 
 app.put('/update_user/:id',(req,res)=>{
 req.on('data', function (data) {
@@ -118,6 +120,8 @@ req.on('data', function (data) {
 
 
 //update post api
+// json format:{"title":"t2","description":"my second post","likes":5,"images_url":"img/myimg2.jpg","u_id":1}
+
 app.put('/update_post/:id',(req,res)=>{
 req.on('data', function (data) {
 	var data2=JSON.parse(data);
@@ -186,7 +190,7 @@ app.get('/get_profile_api/:id',(req,res)=>
 
 
 //api for add_like
-		app.get('/api_like/:id',(req,res)=>
+		app.get('/add_like/:id',(req,res)=>
 		{
 			var count=0;
 			conn.query("select likes from posts where id=?",[req.params.id],(err, row , field)=>
@@ -212,6 +216,6 @@ app.get('/get_profile_api/:id',(req,res)=>
 				res.send(err);
 			}
 			});
-		})
+		});
 
 
